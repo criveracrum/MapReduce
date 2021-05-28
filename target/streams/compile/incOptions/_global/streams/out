@@ -1,0 +1,27 @@
+[0m[[0m[0mdebug[0m] [0m[0mCreated transactional ClassFileManager with tempDir = /Users/Chad/Documents/DePaul/CSC536/MapReduceF/target/scala-2.13/classes.bak[0m
+[0m[[0m[0mdebug[0m] [0m[0mAbout to delete class files:[0m
+[0m[[0m[0mdebug[0m] [0m[0mWe backup class files:[0m
+[0m[[0m[0mdebug[0m] [0m[0mRegistering generated classes:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	MapReduceApplication.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	MapReduceClient.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Done$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Message.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	MapActor$$anonfun$receive$1.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	MapActor.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Flush.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Flush$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Book$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	MapReduceClient$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	MasterActor$$anonfun$receive$1.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	ReduceActor$$anonfun$receive$1.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	MapReduceClient$delayedInit$body.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	MasterActor.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Word$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	MasterActor$$anonfun$hashMapping$1.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Book.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	ReduceActor.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	MapReduceApplication$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Word.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Done.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	MapReduceApplication$delayedInit$body.class[0m
+[0m[[0m[0mdebug[0m] [0m[0mRemoving the temporary directory used for backing up class files: /Users/Chad/Documents/DePaul/CSC536/MapReduceF/target/scala-2.13/classes.bak[0m
