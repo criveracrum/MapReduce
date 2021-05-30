@@ -1,2 +1,4 @@
 [0m[[0m[0mdebug[0m] [0m[0mCopy resource mappings: [0m
 [0m[[0m[0mdebug[0m] [0m[0m	(/Users/Chad/Documents/DePaul/CSC536/MapReduceF/src/main/resources/application.conf,/Users/Chad/Documents/DePaul/CSC536/MapReduceF/target/scala-2.13/classes/application.conf)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	(/Users/Chad/Documents/DePaul/CSC536/MapReduceF/src/main/resources/map1.conf,/Users/Chad/Documents/DePaul/CSC536/MapReduceF/target/scala-2.13/classes/map1.conf)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	(/Users/Chad/Documents/DePaul/CSC536/MapReduceF/src/main/resources/master.conf,/Users/Chad/Documents/DePaul/CSC536/MapReduceF/target/scala-2.13/classes/master.conf)[0m
