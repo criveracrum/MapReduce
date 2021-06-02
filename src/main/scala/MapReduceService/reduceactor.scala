@@ -1,9 +1,9 @@
-package common
-
-import scala.collection.mutable.HashMap
+package MapReduceService
 
 import akka.actor.Actor
 import com.typesafe.config.ConfigFactory
+
+import scala.collection.mutable.HashMap
 
 class ReduceActor extends Actor {
 

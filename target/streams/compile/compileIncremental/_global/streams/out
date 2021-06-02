@@ -1,28 +1,29 @@
 [0m[[0m[0mdebug[0m] [0m[0m[zinc] IncrementalCompile -----------[0m
 [0m[[0m[0mdebug[0m] [0m[0mIncrementalCompile.incrementalCompile[0m
-[0m[[0m[0mdebug[0m] [0m[0mprevious = Stamps for: 22 products, 6 sources, 4 libraries[0m
-[0m[[0m[0mdebug[0m] [0m[0mcurrent source = Set(${BASE}/src/main/scala/server/mapreduceserver.scala, ${BASE}/src/main/scala/client/mapreduceclient.scala, ${BASE}/src/main/scala/common/messages.scala, ${BASE}/src/main/scala/server/MapReduceService.scala, ${BASE}/src/main/scala/common/mapactor.scala, ${BASE}/src/main/scala/common/reduceactor.scala)[0m
-[0m[[0m[0mdebug[0m] [0m[0m> initialChanges = InitialChanges(Changes(added = Set(), removed = Set(), changed = Set(${BASE}/src/main/scala/server/mapreduceserver.scala), unmodified = ...),Set(),Set(),API Changes: Set())[0m
+[0m[[0m[0mdebug[0m] [0m[0mprevious = Stamps for: 20 products, 6 sources, 5 libraries[0m
+[0m[[0m[0mdebug[0m] [0m[0mcurrent source = Set(${BASE}/src/main/scala/MapReduceService/reduceactor.scala, ${BASE}/src/main/scala/MapReduceService/messages.scala, ${BASE}/src/main/scala/MapReduceService/MapReduceService.scala, ${BASE}/src/main/scala/MapReduceService/MapReduceApp.scala, ${BASE}/src/main/scala/MapReduceService/mapreduceclient.scala, ${BASE}/src/main/scala/MapReduceService/mapactor.scala)[0m
+[0m[[0m[0mdebug[0m] [0m[0mInvalidating '${BASE}/target/scala-2.13/classes/common/Flush.class' because ${BASE}/target/scala-2.13/classes/common/Flush.class (farm(14f209cee7ffa097)) != ${BASE}/target/scala-2.13/classes (absent)[0m
+[0m[[0m[0mdebug[0m] [0m[0m> initialChanges = InitialChanges(Changes(added = Set(), removed = Set(), changed = Set(${BASE}/src/main/scala/MapReduceService/mapreduceclient.scala, ${BASE}/src/main/scala/MapReduceService/MapReduceService.scala), unmodified = ...),Set(),Set(${BASE}/target/scala-2.13/classes/common/Flush.class),API Changes: Set())[0m
 [0m[[0m[0mdebug[0m] [0m[0m[0m
 [0m[[0m[0mdebug[0m] [0m[0mInitial source changes:[0m
 [0m[[0m[0mdebug[0m] [0m[0m	removed: Set()[0m
 [0m[[0m[0mdebug[0m] [0m[0m	added: Set()[0m
-[0m[[0m[0mdebug[0m] [0m[0m	modified: Set(${BASE}/src/main/scala/server/mapreduceserver.scala)[0m
+[0m[[0m[0mdebug[0m] [0m[0m	modified: Set(${BASE}/src/main/scala/MapReduceService/mapreduceclient.scala, ${BASE}/src/main/scala/MapReduceService/MapReduceService.scala)[0m
 [0m[[0m[0mdebug[0m] [0m[0mInvalidated products: Set()[0m
 [0m[[0m[0mdebug[0m] [0m[0mExternal API changes: API Changes: Set()[0m
-[0m[[0m[0mdebug[0m] [0m[0mModified binary dependencies: Set()[0m
-[0m[[0m[0mdebug[0m] [0m[0mInitial directly invalidated classes: Set(server.SampleClient, server.MapReduceServer)[0m
+[0m[[0m[0mdebug[0m] [0m[0mModified binary dependencies: Set(${BASE}/target/scala-2.13/classes/common/Flush.class)[0m
+[0m[[0m[0mdebug[0m] [0m[0mInitial directly invalidated classes: Set(MapReduceService.MapReduceClient, MapReduceService.MapReduceService)[0m
 [0m[[0m[0mdebug[0m] [0m[0mSources indirectly invalidated by:[0m
 [0m[[0m[0mdebug[0m] [0m[0m	product: Set()[0m
-[0m[[0m[0mdebug[0m] [0m[0m	binary dep: Set()[0m
+[0m[[0m[0mdebug[0m] [0m[0m	binary dep: Set(${BASE}/src/main/scala/MapReduceService/mapactor.scala)[0m
 [0m[[0m[0mdebug[0m] [0m[0m	external source: Set()[0m
-[0m[[0m[0mdebug[0m] [0m[0mAll initially invalidated classes: Set(server.SampleClient, server.MapReduceServer)[0m
-[0m[[0m[0mdebug[0m] [0m[0mAll initially invalidated sources:Set(${BASE}/src/main/scala/server/mapreduceserver.scala)[0m
-[0m[[0m[0mdebug[0m] [0m[0mInitial set of included nodes: server.SampleClient, server.MapReduceServer[0m
+[0m[[0m[0mdebug[0m] [0m[0mAll initially invalidated classes: Set(MapReduceService.MapReduceClient, MapReduceService.MapReduceService)[0m
+[0m[[0m[0mdebug[0m] [0m[0mAll initially invalidated sources:Set(${BASE}/src/main/scala/MapReduceService/mapreduceclient.scala, ${BASE}/src/main/scala/MapReduceService/MapReduceService.scala, ${BASE}/src/main/scala/MapReduceService/mapactor.scala)[0m
+[0m[[0m[0mdebug[0m] [0m[0mInitial set of included nodes: MapReduceService.MapReduceClient, MapReduceService.MapReduceService[0m
 [0m[[0m[0mdebug[0m] [0m[0mcompilation cycle 1[0m
-[0m[[0m[0minfo[0m] [0m[0mcompiling 1 Scala source to /Users/Chad/Documents/DePaul/CSC536/MapReduceF/target/scala-2.13/classes ...[0m
+[0m[[0m[0minfo[0m] [0m[0mcompiling 3 Scala sources to /Users/Chad/Documents/DePaul/CSC536/MapReduceF/target/scala-2.13/classes ...[0m
 [0m[[0m[0mdebug[0m] [0m[0mGetting org.scala-sbt:compiler-bridge_2.13:1.4.3:compile for Scala 2.13.5[0m
-[0m[[0m[0mdebug[0m] [0m[0m[zinc] Running cached compiler 1b77932b for Scala compiler version 2.13.5[0m
+[0m[[0m[0mdebug[0m] [0m[0m[zinc] Running cached compiler 3ca1db05 for Scala compiler version 2.13.5[0m
 [0m[[0m[0mdebug[0m] [0m[0m[zinc] The Scala compiler is invoked with:[0m
 [0m[[0m[0mdebug[0m] [0m[0m	-unchecked[0m
 [0m[[0m[0mdebug[0m] [0m[0m	-deprecation[0m
@@ -30,29 +31,11 @@
 [0m[[0m[0mdebug[0m] [0m[0m	/Users/Chad/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala-library/2.13.5/scala-library-2.13.5.jar[0m
 [0m[[0m[0mdebug[0m] [0m[0m	-classpath[0m
 [0m[[0m[0mdebug[0m] [0m[0m	/Users/Chad/Documents/DePaul/CSC536/MapReduceF/target/scala-2.13/classes:/Users/Chad/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/typesafe/akka/akka-actor_2.13/2.6.14/akka-actor_2.13-2.6.14.jar:/Users/Chad/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/typesafe/akka/akka-serialization-jackson_2.13/2.6.14/akka-serialization-jackson_2.13-2.6.14.jar:/Users/Chad/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/typesafe/akka/akka-cluster_2.13/2.6.14/akka-cluster_2.13-2.6.14.jar:/Users/Chad/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/typesafe/akka/akka-cluster-tools_2.13/2.6.14/akka-cluster-tools_2.13-2.6.14.jar:/Users/Chad/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/typesafe/config/1.4.0/config-1.4.0.jar:/Users/Chad/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/modules/scala-java8-compat_2.13/0.9.0/scala-java8-compat_2.13-0.9.0.jar:/Users/Chad/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-core/2.11.4/jackson-core-2.11.4.jar:/Users/Chad/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-annotations/2.11.4/jackson-annotations-2.11.4.jar:/Users/Chad/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.11.4/jackson-databind-2.11.4.jar:/Users/Chad/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/fasterxml/jackson/module/jackson-module-scala_2.13/2.11.4/jackson-module-scala_2.13-2.11.4.jar:/Users/Chad/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/fasterxml/jackson/datatype/jackson-datatype-jdk8/2.11.4/jackson-datatype-jdk8-2.11.4.jar:/Users/Chad/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.11.4/jackson-datatype-jsr310-2.11.4.jar:/Users/Chad/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/fasterxml/jackson/module/jackson-module-parameter-names/2.11.4/jackson-module-parameter-names-2.11.4.jar:/Users/Chad/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/fasterxml/jackson/dataformat/jackson-dataformat-cbor/2.11.4/jackson-dataformat-cbor-2.11.4.jar:/Users/Chad/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/lz4/lz4-java/1.7.1/lz4-java-1.7.1.jar:/Users/Chad/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/typesafe/akka/akka-remote_2.13/2.6.14/akka-remote_2.13-2.6.14.jar:/Users/Chad/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/typesafe/akka/akka-coordination_2.13/2.6.14/akka-coordination_2.13-2.6.14.jar:/Users/Chad/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/fasterxml/jackson/module/jackson-module-paranamer/2.11.4/jackson-module-paranamer-2.11.4.jar:/Users/Chad/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/typesafe/akka/akka-stream_2.13/2.6.14/akka-stream_2.13-2.6.14.jar:/Users/Chad/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/typesafe/akka/akka-pki_2.13/2.6.14/akka-pki_2.13-2.6.14.jar:/Users/Chad/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/agrona/agrona/1.9.0/agrona-1.9.0.jar:/Users/Chad/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/thoughtworks/paranamer/paranamer/2.8/paranamer-2.8.jar:/Users/Chad/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/typesafe/akka/akka-protobuf-v3_2.13/2.6.14/akka-protobuf-v3_2.13-2.6.14.jar:/Users/Chad/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/reactivestreams/reactive-streams/1.0.3/reactive-streams-1.0.3.jar:/Users/Chad/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/typesafe/ssl-config-core_2.13/0.4.2/ssl-config-core_2.13-0.4.2.jar:/Users/Chad/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/com/hierynomus/asn-one/0.5.0/asn-one-0.5.0.jar:/Users/Chad/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/slf4j/slf4j-api/1.7.30/slf4j-api-1.7.30.jar:/Users/Chad/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/modules/scala-parser-combinators_2.13/1.1.2/scala-parser-combinators_2.13-1.1.2.jar[0m
-[0m[[0m[0mdebug[0m] [0m[0mInvalidating (transitively) by inheritance from server.SampleClient...[0m
-[0m[[0m[0mdebug[0m] [0m[0mInitial set of included nodes: server.SampleClient[0m
-[0m[[0m[0mdebug[0m] [0m[0mInvalidated by transitive inheritance dependency: Set(server.SampleClient)[0m
-[0m[[0m[0mdebug[0m] [0m[0mChange NamesChange(server.SampleClient,ModifiedNames(changes = UsedName(aroundPostRestart,[Default]))) invalidates 1 classes due to The server.SampleClient has the following regular definitions changed:[0m
-[0m[[0m[0mdebug[0m] [0m[0m	UsedName(aroundPostRestart,[Default]).[0m
-[0m[[0m[0mdebug[0m] [0m[0m  > by transitive inheritance: Set(server.SampleClient)[0m
-[0m[[0m[0mdebug[0m] [0m[0m  > [0m
-[0m[[0m[0mdebug[0m] [0m[0m  > [0m
-[0m[[0m[0mdebug[0m] [0m[0m        [0m
-[0m[[0m[0mdebug[0m] [0m[0mInvalidating (transitively) by inheritance from server.MapReduceServer...[0m
-[0m[[0m[0mdebug[0m] [0m[0mInitial set of included nodes: server.MapReduceServer[0m
-[0m[[0m[0mdebug[0m] [0m[0mInvalidated by transitive inheritance dependency: Set(server.MapReduceServer)[0m
-[0m[[0m[0mdebug[0m] [0m[0mChange NamesChange(server.MapReduceServer,ModifiedNames(changes = UsedName(finalize,[Default]))) invalidates 1 classes due to The server.MapReduceServer has the following regular definitions changed:[0m
-[0m[[0m[0mdebug[0m] [0m[0m	UsedName(finalize,[Default]).[0m
-[0m[[0m[0mdebug[0m] [0m[0m  > by transitive inheritance: Set(server.MapReduceServer)[0m
-[0m[[0m[0mdebug[0m] [0m[0m  > [0m
-[0m[[0m[0mdebug[0m] [0m[0m  > [0m
-[0m[[0m[0mdebug[0m] [0m[0m        [0m
 [0m[[0m[0mdebug[0m] [0m[0mNew invalidations:[0m
 [0m[[0m[0mdebug[0m] [0m[0mInitial set of included nodes: [0m
 [0m[[0m[0mdebug[0m] [0m[0mPreviously invalidated, but (transitively) depend on new invalidations:[0m
 [0m[[0m[0mdebug[0m] [0m[0mFinal step, transitive dependencies:[0m
 [0m[[0m[0mdebug[0m] [0m[0m	Set()[0m
 [0m[[0m[0mdebug[0m] [0m[0mNo classes were invalidated.[0m
-[0m[[0m[0mdebug[0m] [0m[0mScala compilation took 3.350034074 s[0m
+[0m[[0m[0mdebug[0m] [0m[0mScala compilation took 3.945961043 s[0m
 [0m[[0m[0minfo[0m] [0m[0mdone compiling[0m

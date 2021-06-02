@@ -1,11 +1,11 @@
-package common
-
-import scala.collection.mutable.HashSet
-
-import scala.io.Source
+package MapReduceService
 
 import akka.actor.{Actor, ActorRef}
 import akka.routing.Broadcast
+import common.Flush
+
+import scala.collection.mutable.HashSet
+import scala.io.Source
 
 class MapActor(reduceActors: ActorRef) extends Actor {
 

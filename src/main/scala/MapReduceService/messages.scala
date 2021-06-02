@@ -1,4 +1,4 @@
-package common
+package MapReduceService
 
 trait Message
 case class Book(title: String, url: String) extends Message
