@@ -20,10 +20,29 @@ object MapReduceApp {
         akka.remote.artery.canonical.port=$port
         """).withFallback(
       ConfigFactory.parseString("akka.cluster.roles = [service]")).
-        withFallback(ConfigFactory.load())
+        withFallback(ConfigFactory.load("workers"))
       val system = ActorSystem("ClusterSystem", config)
       system.actorOf(Props[MapReduceService](), name = "service")
     }
+    for (i <- 0 to 2){
+      val config = ConfigFactory.parseString(s"""
+        akka.remote.artery.canonical.port=0
+        """).withFallback(
+        ConfigFactory.parseString("akka.cluster.roles = [reducer]")).
+        withFallback(ConfigFactory.load())
+      val system = ActorSystem("ClusterSystem", config)
+      system.actorOf(Props[ReduceActor](), name = "reducer")
+    }
+    for (i <- 0 to 2){
+      val config = ConfigFactory.parseString(s"""
+        akka.remote.artery.canonical.port=0
+        """).withFallback(
+        ConfigFactory.parseString("akka.cluster.roles = [mapper]")).
+        withFallback(ConfigFactory.load("mapper"))
+      val system = ActorSystem("ClusterSystem", config)
+      system.actorOf(Props[MapActor](), name = "mapper")
+    }
+
 
   }
 }

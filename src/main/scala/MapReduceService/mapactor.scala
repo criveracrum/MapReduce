@@ -1,39 +1,36 @@
 package MapReduceService
 
-import akka.actor.{Actor, ActorRef}
-import akka.routing.Broadcast
-import common.Flush
+import akka.actor.{Actor, ActorRef, Props}
+import akka.cluster.ClusterEvent.{InitialStateAsEvents, MemberEvent, UnreachableMember}
+import akka.routing.{Broadcast, FromConfig}
 
 import scala.collection.mutable.HashSet
 import scala.io.Source
 
-class MapActor(reduceActors: ActorRef) extends Actor {
+class MapActor extends Actor {
 
-  println(self.path)
+  val reduceRouter = context.actorOf(FromConfig.props(Props[ReduceActor]()),
+    name = "reduceRouter")
 
-  Thread sleep 5000
+  override def preStart(): Unit = {
+    println("MapActor Start Path is: " + self.path.toString)
+  }
 
   val STOP_WORDS_LIST = List("a", "am", "an", "and", "are", "as", "at", "be",
     "do", "go", "if", "in", "is", "it", "of", "on", "the", "to")
 
   def receive = {
-    case Book(title, url) =>
-      process(title, url)
-    case Flush => 
-      reduceActors ! Broadcast(Flush)
+    case Job(in_key, in_value) =>
+      println("MapActor received ", in_value)
+      reduceRouter ! Reduce(in_key, in_value)
+    case msg =>
+          println("Misc Message ", msg)
+
+//    case Flush =>
+//      reduceActors ! Broadcast(Flush)
   }
 
-  // Process book
-  def process(title: String, url: String) = {
-    val content = getContent(url)
-    var namesFound = HashSet[String]()
-    for (word <- content.split("[\\p{Punct}\\s]+")) {
-      if ((!STOP_WORDS_LIST.contains(word)) && word(0).isUpper && !namesFound.contains(word)) {
-	reduceActors ! Word(word, title)
-        namesFound += word
-      }
-    }
-  }
+//  def process
 
   // Get the content at the given URL and return it as a string
   def getContent( url: String ) = {

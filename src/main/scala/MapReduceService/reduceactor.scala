@@ -7,27 +7,23 @@ import scala.collection.mutable.HashMap
 
 class ReduceActor extends Actor {
 
-  println(self.path)
+  override def preStart(): Unit = {
+    println("ReduceActor Start Path is: " + self.path.toString)
+  }
 
-  Thread sleep 5000
-
-  var remainingMappers = ConfigFactory.load.getInt("number-mappers")
-  var reduceMap = HashMap[String, List[String]]()
 
   def receive = {
-    case Word(word, title) =>
-      if (reduceMap.contains(word)) {
-        if (!reduceMap(word).contains(title))
-	  reduceMap += (word -> (title :: reduceMap(word)))
-      }
-      else
-	reduceMap += (word -> List(title))
-    case Flush =>
-      remainingMappers -= 1
-      if (remainingMappers == 0) {
-        println(self.path.toStringWithoutAddress + " : " + reduceMap)
-        context.actorSelection("../..") ! Done
-        // context stop self
-      }
+
+    case Reduce(out_key, inter_val) =>
+      println("ReduceActor received ", out_key)
+    case msg =>
+      println("Misc Message ", msg)
+//    case Flush =>
+//      remainingMappers -= 1
+//      if (remainingMappers == 0) {
+//        println(self.path.toStringWithoutAddress + " : " + reduceMap)
+//        context.actorSelection("../..") ! Done
+//        // context stop self
+//      }
   }
 }
