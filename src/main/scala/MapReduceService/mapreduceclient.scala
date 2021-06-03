@@ -34,11 +34,33 @@ class MapReduceClient extends Actor {
     cluster.subscribe(self, initialStateMode = InitialStateAsEvents,
       classOf[MemberEvent], classOf[UnreachableMember])
   }
+//  def f(x: String, y: List[String]): List[(String, String)] = {
+//    var jobs: List[(String, String)] = List()
+//    for (word <- y){
+//      if (!jobs.contains(word, x)){
+//        jobs = (word, x) :: jobs
+//      }
+//    }
+//    jobs
+//  }
   def sendJob(): Unit = {
     var i = 0
-    for (i <- 0 to 9){
-        router ! Job("client", i)
+    val f = (x: String, y: List[String]) => {
+      var jobs: List[(String, String)] = List()
+      for (word <- y){
+        if (!jobs.contains(word, x)){
+          jobs = (word, x) :: jobs
+        }
+      }
+      jobs
     }
+//    println(f("1", List("Bear", "Deer") ))
+    router ! Job(f, "1", List("Bear", "Deer"))
+    router ! Job(f, "2", List("Deer", "Deer"))
+    router ! Job(f, "3", List("Insect", "Pheromone"))
+    router ! Job(f, "4", List("Insect", "Pheromone"))
+    Thread sleep (200)
+    router ! Flush
   }
 
   var total = 0
