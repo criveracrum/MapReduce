@@ -45,20 +45,22 @@ class MapReduceClient extends Actor {
 //  }
   def sendJob(): Unit = {
     var i = 0
-    val f = (x: String, y: List[String]) => {
-      var jobs: List[(String, String)] = List()
-      for (word <- y){
-        if (!jobs.contains(word, x)){
-          jobs = (word, x) :: jobs
-        }
-      }
-      jobs
-    }
+//    val f = (x: String, y: List[String]) => {
+//      var jobs: List[(String, String)] = List()
+//      for (word <- y){
+//        if (!jobs.contains(word, x)){
+//          jobs = (word, x) :: jobs
+//        }
+//      }
+//      jobs
+//    }
 //    println(f("1", List("Bear", "Deer") ))
-    router ! Job(f, "1", List("Bear", "Deer"))
-    router ! Job(f, "2", List("Deer", "Deer"))
-    router ! Job(f, "3", List("Insect", "Pheromone"))
-    router ! Job(f, "4", List("Insect", "Pheromone"))
+    val f = new Jobs
+
+    router ! Job(f.job1Map, "Title1", "Jobs/job1/Title1.txt")
+    router ! Job(f.job1Map, "Title2", "Jobs/job1/Title2.txt")
+    router ! Job(f.job1Map, "Title3", "Jobs/job1/Title3.txt")
+
     Thread sleep (200)
     router ! Flush
   }
