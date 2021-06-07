@@ -19,16 +19,16 @@ class MapActor extends Actor {
     println("MapActor Start Path is: " + self.path.toString)
   }
 
-
+  var currJob = 3
   def receive = {
     case Job(func, in_key, in_value) =>
       //println("MapActor received ", in_value)
-      func match {
-        case "1" => map1(in_key, in_value)
-//        case "2" => map2(in_key, in_value)
-//        case "3" => map3(in_key, in_value)
+      currJob match {
+        case 1 => map(new MapJob1, in_key, in_value)
+        case 2 => map(new MapJob2,in_key, in_value)
+        case 3 => map(new MapJob3, in_key, in_value)
       }
-      //map(func, in_key, in_value)
+
     case Flush =>
       reduceRouter ! Broadcast(Flush)
 
@@ -47,11 +47,11 @@ class MapActor extends Actor {
 ////        reduceRouter ! ConsistentHashableEnvelope(Reduce(i._1, i._2), i._1)
 ////      }
 //  }
-  def map1[S, T](value: String, value1: String): Unit = {
-    val job1 = new MapJob1()
-    val list = job1.map(value, value1)
+  def map[A, B, C, D](func: Mapper[A, B, C, D], value: A, value1: B): Unit = {
+    val list = func.map(value, value1)
+    //println(list)
     for (i <- list){
-      reduceRouter ! ConsistentHashableEnvelope(Reduce("1", i._1, i._2), i._1)
+      reduceRouter ! ConsistentHashableEnvelope(Reduce(i._1, i._2), i._1)
     }
   }
 

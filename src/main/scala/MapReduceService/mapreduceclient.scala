@@ -61,11 +61,17 @@ class MapReduceClient extends Actor {
 //    println(f("1", List("Bear", "Deer") ))
 
 
-    router ! Job("1", "Title1", "Jobs/job1/Title1.txt")
-    router ! Job("1", "Title2", "Jobs/job1/Title2.txt")
-    router ! Job("1", "Title3", "Jobs/job1/Title3.txt")
+//    router ! Job("1", "Title1", "Jobs/job1/Title1.txt")
+//    router ! Job("1", "Title2", "Jobs/job1/Title2.txt")
+//    router ! Job("1", "Title3", "Jobs/job1/Title3.txt")
+//      router ! Job("1", "Bleak House", "Jobs/job2/Bleak House.txt")
+//      router ! Job("1", "The Cricket on the Hearth", "Jobs/job2/The Cricket on the Hearth.txt")
+//      router ! Job("1", "The Old Curiosity Shop", "Jobs/job2/The Old Curiosity Shop.txt")
+    router ! Job("1", "test.html", "Jobs/job3/test.html")
+    router ! Job("1", "test1.html", "Jobs/job3/test1.html")
+    router ! Job("1", "test2.html", "Jobs/job3/test2.html")
 
-    Thread sleep (200)
+    Thread sleep (400)
     router ! Flush
   }
 
