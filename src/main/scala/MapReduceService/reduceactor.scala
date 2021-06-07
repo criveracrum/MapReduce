@@ -4,6 +4,7 @@ import scala.collection.mutable.HashMap
 import akka.actor.Actor
 import com.typesafe.config.ConfigFactory
 
+import scala.collection.mutable
 import scala.collection.mutable.HashMap
 
 class ReduceActor extends Actor {
@@ -14,12 +15,14 @@ class ReduceActor extends Actor {
   }
 
   var mappers = 2
-  var reduceMap = HashMap[Any,List[Any]]()
+  var reduceMap = HashMap[Any,Int]()
   def receive = {
 
-    case Reduce(out_key, inter_val) =>
+    case Reduce(func, out_key, inter_val) =>
       //println(self.toString(), " received ", out)
       reduce(out_key, inter_val)
+      var i = new ReduceJob1
+      i.reduce(out_key, inter_val)
 
     case Flush =>
       mappers -= 1
@@ -32,14 +35,11 @@ class ReduceActor extends Actor {
   }
 
   def reduce[X,Y](out_key: X, inter_val: Y): Unit = {
-
     if (reduceMap.contains(out_key)){
-      if (!reduceMap(out_key).contains(inter_val))
-        reduceMap += (out_key -> (inter_val :: reduceMap(out_key)))
+      reduceMap += (out_key -> (reduceMap(out_key) + 1))
     } else {
-      reduceMap += (out_key -> List(inter_val))
+      reduceMap += (out_key -> 1)
     }
-
     //println(reduceMap)
   }
 

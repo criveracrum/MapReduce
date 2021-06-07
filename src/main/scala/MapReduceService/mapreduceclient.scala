@@ -7,6 +7,8 @@ import akka.cluster.MemberStatus
 import akka.routing.{Broadcast, FromConfig}
 import com.typesafe.config.ConfigFactory
 
+import scala.io.Source
+
 object MapReduceClient {
 
   def main(args: Array[String]): Unit = {
@@ -45,21 +47,23 @@ class MapReduceClient extends Actor {
 //  }
   def sendJob(): Unit = {
     var i = 0
-//    val f = (x: String, y: List[String]) => {
-//      var jobs: List[(String, String)] = List()
-//      for (word <- y){
-//        if (!jobs.contains(word, x)){
-//          jobs = (word, x) :: jobs
+//    val f = (in_key: String, in_value: String) => {
+//      val content = Source.fromFile(in_value).mkString
+//      var jobs: List[(String, Int)] = List()
+//      var word : String = ""
+//      for (word <- content.split("[\\p{Punct}\\s]+")){
+//        if (!jobs.contains(word, in_key)){
+//          jobs = (word, 1) :: jobs
 //        }
 //      }
 //      jobs
 //    }
 //    println(f("1", List("Bear", "Deer") ))
-    val f = new Jobs
 
-    router ! Job(f.job1Map, "Title1", "Jobs/job1/Title1.txt")
-    router ! Job(f.job1Map, "Title2", "Jobs/job1/Title2.txt")
-    router ! Job(f.job1Map, "Title3", "Jobs/job1/Title3.txt")
+
+    router ! Job("1", "Title1", "Jobs/job1/Title1.txt")
+    router ! Job("1", "Title2", "Jobs/job1/Title2.txt")
+    router ! Job("1", "Title3", "Jobs/job1/Title3.txt")
 
     Thread sleep (200)
     router ! Flush

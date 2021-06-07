@@ -5,7 +5,7 @@ import akka.cluster.ClusterEvent.{InitialStateAsEvents, MemberEvent, Unreachable
 import akka.routing.ConsistentHashingRouter.ConsistentHashableEnvelope
 import akka.routing.{Broadcast, FromConfig}
 
-import scala.collection.mutable.HashSet
+import scala.collection.mutable.{HashMap, HashSet}
 import scala.io.Source
 
 class MapActor extends Actor {
@@ -23,7 +23,12 @@ class MapActor extends Actor {
   def receive = {
     case Job(func, in_key, in_value) =>
       //println("MapActor received ", in_value)
-      map(func, in_key, in_value)
+      func match {
+        case "1" => map1(in_key, in_value)
+//        case "2" => map2(in_key, in_value)
+//        case "3" => map3(in_key, in_value)
+      }
+      //map(func, in_key, in_value)
     case Flush =>
       reduceRouter ! Broadcast(Flush)
 
@@ -33,13 +38,21 @@ class MapActor extends Actor {
 
   }
 
-  def map[S,T,X,Y](f: (S,T) => List[(X,Y)], in_key: S, in_value: T): Unit ={
-      val list = f(in_key, in_value)
-      println("Mapper List ", list)
-      for (i <- list){
-        //(out_key, intermediate_value)
-        reduceRouter ! ConsistentHashableEnvelope(Reduce(i._1, i._2), i._1)
-      }
+//  def map[S, T, U, V](in_key: S, in_value: T): Unit ={
+//
+//      val list = f.map(in_key, in_value)
+//      println("Mapper List ", list)
+////      for (i <- list){
+////        //(out_key, intermediate_value)
+////        reduceRouter ! ConsistentHashableEnvelope(Reduce(i._1, i._2), i._1)
+////      }
+//  }
+  def map1[S, T](value: String, value1: String): Unit = {
+    val job1 = new MapJob1()
+    val list = job1.map(value, value1)
+    for (i <- list){
+      reduceRouter ! ConsistentHashableEnvelope(Reduce("1", i._1, i._2), i._1)
+    }
   }
 
   // Get the content at the given URL and return it as a string

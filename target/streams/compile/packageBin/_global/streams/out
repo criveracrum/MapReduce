@@ -76,6 +76,8 @@
 [0m[[0m[0mdebug[0m] [0m[0m	  /Users/Chad/Documents/DePaul/CSC536/MapReduceF/target/scala-2.13/classes/MapReduceService/MapReduceClient$.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	MapReduceService/Flush.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  /Users/Chad/Documents/DePaul/CSC536/MapReduceF/target/scala-2.13/classes/MapReduceService/Flush.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	MapReduceService/MapReduceJob.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/Chad/Documents/DePaul/CSC536/MapReduceF/target/scala-2.13/classes/MapReduceService/MapReduceJob.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	MapReduceService/Flush$.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  /Users/Chad/Documents/DePaul/CSC536/MapReduceF/target/scala-2.13/classes/MapReduceService/Flush$.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	MapReduceService/MapReduceClient.class[0m
@@ -90,6 +92,8 @@
 [0m[[0m[0mdebug[0m] [0m[0m	  /Users/Chad/Documents/DePaul/CSC536/MapReduceF/target/scala-2.13/classes/MapReduceService/Done.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	MapReduceService/Job.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  /Users/Chad/Documents/DePaul/CSC536/MapReduceF/target/scala-2.13/classes/MapReduceService/Job.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	MapReduceService/Job1.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/Chad/Documents/DePaul/CSC536/MapReduceF/target/scala-2.13/classes/MapReduceService/Job1.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	MapReduceService/MapReduceClient$$anonfun$receive$1.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  /Users/Chad/Documents/DePaul/CSC536/MapReduceF/target/scala-2.13/classes/MapReduceService/MapReduceClient$$anonfun$receive$1.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	MapReduceService/ReduceActor$$anonfun$receive$1.class[0m
