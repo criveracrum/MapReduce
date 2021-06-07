@@ -17,6 +17,8 @@ class MapReduceService extends Actor {
 
   val mapRouter = context.actorOf(FromConfig.props(Props[MapActor]()),
     name = "mapRouter")
+  val supervisor = context.actorSelection("akka://ClusterSystem@127.0.0.1:2552/user/supervisor")
+  supervisor ! "WatchMe"
 
   override def preStart(): Unit = {
     cluster.subscribe(self, initialStateMode = InitialStateAsEvents,

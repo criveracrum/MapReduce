@@ -17,7 +17,8 @@ class ReduceActor extends Actor {
   val job2 = ReduceJob2()
   val job3 = ReduceJob3()
   var currJob = 1
-
+  val supervisor = context.actorSelection("akka://ClusterSystem@127.0.0.1:2552/user/supervisor")
+  supervisor ! "WatchMe"
 
   var mappers = 3
   var reduceMap = HashMap[Any,Any]()

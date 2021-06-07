@@ -14,7 +14,8 @@ class MapActor extends Actor {
 
   val reduceRouter = context.actorOf(FromConfig.props(Props[ReduceActor]()),
     name = "reduceRouter")
-
+  val supervisor = context.actorSelection("akka://ClusterSystem@127.0.0.1:2552/user/supervisor")
+  supervisor ! "WatchMe"
   override def preStart(): Unit = {
     println("MapActor Start Path is: " + self.path.toString)
   }

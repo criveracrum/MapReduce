@@ -19,8 +19,10 @@ object MapReduceClient {
         """)
       .withFallback(ConfigFactory.load("master"))
 
+
     val system = ActorSystem("ClusterSystem", config)
     system.actorOf(Props(classOf[MapReduceClient]), "client")
+
   }
 }
 
@@ -30,21 +32,14 @@ class MapReduceClient extends Actor {
 
   val router = context.actorOf(FromConfig.props(Props[MapReduceService]()),
     name = "workerRouter")
+  val supervisor = context.actorSelection("akka://ClusterSystem@127.0.0.1:2552/user/supervisor")
 
   override def preStart(): Unit = {
     println("Client Start Path is: " + self.path.toString)
     cluster.subscribe(self, initialStateMode = InitialStateAsEvents,
       classOf[MemberEvent], classOf[UnreachableMember])
   }
-//  def f(x: String, y: List[String]): List[(String, String)] = {
-//    var jobs: List[(String, String)] = List()
-//    for (word <- y){
-//      if (!jobs.contains(word, x)){
-//        jobs = (word, x) :: jobs
-//      }
-//    }
-//    jobs
-//  }
+
   def sendJob(): Unit = {
 
 
@@ -80,24 +75,32 @@ class MapReduceClient extends Actor {
   var mapTotal= 0
 
   def receive = {
-    case MemberUp(member) if member.hasRole("service")=>
-      total += 1
-      //println("Client total is ", total)
-      if (total >= 3) {
-        sendJob()
-      }
-
-    case MemberUp(member) if member.hasRole("mapper")=>
-      mapTotal += 1
-      println("mapper seen ", mapTotal)
-
-    case UnreachableMember(member) =>
-      //println("Member detected as unreachable: {}", member)
-    case MemberRemoved(member, previousStatus) =>
-      total -= 1
-      println("Member removed! Client total members:  ",
-        total, member.address)
-
+    case MemberUp(member) if member.hasRole("supervisor") => {
+      println("client sees supervisor")
+      supervisor ! "Hi"
+      supervisor ! RequestForService()
+    }
+//    case MemberUp(member) if member.hasRole("service") =>
+//      total += 1
+//      //println("Client total is ", total)
+//
+//    case MemberUp(member) if member.hasRole("mapper")=>
+//      mapTotal += 1
+//      println("mapper seen ", mapTotal)
+//
+//    case UnreachableMember(member) =>
+//      //println("Member detected as unreachable: {}", member)
+//    case MemberRemoved(member, previousStatus) =>
+//      total -= 1
+//      println("Member removed! Client total members:  ",
+//        total, member.address)
+    case msg if (msg == "Start") =>
+      println(msg)
+      sendJob()
+    case msg if (msg == "Wait") =>
+      println(msg)
+      Thread sleep (800)
+      supervisor ! RequestForService
   }
 }
 
