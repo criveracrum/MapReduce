@@ -19,16 +19,19 @@ class MapActor extends Actor {
     println("MapActor Start Path is: " + self.path.toString)
   }
 
-  var currJob = 3
+  var currJob = 1
   def receive = {
-    case Job(func, in_key, in_value) =>
+    case Job(in_key, in_value) =>
       //println("MapActor received ", in_value)
       currJob match {
         case 1 => map(new MapJob1, in_key, in_value)
         case 2 => map(new MapJob2,in_key, in_value)
         case 3 => map(new MapJob3, in_key, in_value)
       }
-
+    case JobNum(num) =>
+      println("Mapper got job type ", num)
+      currJob = num
+      reduceRouter ! Broadcast(JobNum(num))
     case Flush =>
       reduceRouter ! Broadcast(Flush)
 

@@ -1,5 +1,10 @@
 package MapReduceService
 
+
+
+import org.jsoup.Jsoup
+
+import java.io.File
 import scala.collection.mutable
 import scala.collection.mutable.HashMap
 import scala.io.Source
@@ -79,10 +84,9 @@ class MapJob2 extends Mapper[String, String, String, String]{
 class MapJob3 extends Mapper[String, String, String, String]{
   def map(in_key: String, in_value: String): List[(String, String)] = {
     val content = Source.fromFile(in_value).mkString
-
     var jobs: List[(String, String)] = List()
     var name : String = ""
-    for (name <- content.split("[\\p{Punct}\\s]+")){
+    for (name <- content.split("\\s+")){
         if (!jobs.contains((name, in_key))) { //prevent addition and sending of duplicate (name, title)
           jobs = (name, in_key) :: jobs
         }

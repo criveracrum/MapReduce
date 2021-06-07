@@ -34,14 +34,15 @@ class MapReduceService extends Actor {
   var total = 0
   var mapTotal = 0
   def receive = {
-    case Job(func, in_key, in_value) =>
+    case Job(in_key, in_value) =>
 
-      queue.enqueue(Job(func, in_key, in_value))
+      queue.enqueue(Job(in_key, in_value))
 //      println("Received job with ", in_key, in_value, queue.size)
       if (mapTotal >=1){
         sendJob()
       }
-
+    case JobNum(num) =>
+      mapRouter ! Broadcast(JobNum(num))
     case MemberUp(member) if member.hasRole("mapper")=>
       mapTotal += 1
       println("Master sees mapper ", mapTotal)

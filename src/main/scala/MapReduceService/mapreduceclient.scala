@@ -46,30 +46,31 @@ class MapReduceClient extends Actor {
 //    jobs
 //  }
   def sendJob(): Unit = {
-    var i = 0
-//    val f = (in_key: String, in_value: String) => {
-//      val content = Source.fromFile(in_value).mkString
-//      var jobs: List[(String, Int)] = List()
-//      var word : String = ""
-//      for (word <- content.split("[\\p{Punct}\\s]+")){
-//        if (!jobs.contains(word, in_key)){
-//          jobs = (word, 1) :: jobs
-//        }
-//      }
-//      jobs
-//    }
-//    println(f("1", List("Bear", "Deer") ))
 
 
-//    router ! Job("1", "Title1", "Jobs/job1/Title1.txt")
-//    router ! Job("1", "Title2", "Jobs/job1/Title2.txt")
-//    router ! Job("1", "Title3", "Jobs/job1/Title3.txt")
-//      router ! Job("1", "Bleak House", "Jobs/job2/Bleak House.txt")
-//      router ! Job("1", "The Cricket on the Hearth", "Jobs/job2/The Cricket on the Hearth.txt")
-//      router ! Job("1", "The Old Curiosity Shop", "Jobs/job2/The Old Curiosity Shop.txt")
-    router ! Job("1", "test.html", "Jobs/job3/test.html")
-    router ! Job("1", "test1.html", "Jobs/job3/test1.html")
-    router ! Job("1", "test2.html", "Jobs/job3/test2.html")
+    router ! JobNum(1)
+    Thread sleep (800)
+    router ! Job("Title1", "Jobs/job1/Title1.txt")
+    router ! Job("Title2", "Jobs/job1/Title2.txt")
+    router ! Job("Title3", "Jobs/job1/Title3.txt")
+    Thread sleep (400)
+    router ! Flush
+
+    Thread sleep (7000)
+    router ! JobNum(2)
+    Thread sleep (800)
+    router ! Job("Bleak House", "Jobs/job2/Bleak House.txt")
+    router ! Job("The Cricket on the Hearth", "Jobs/job2/The Cricket on the Hearth.txt")
+    router ! Job("The Old Curiosity Shop", "Jobs/job2/The Old Curiosity Shop.txt")
+    Thread sleep (400)
+    router ! Flush
+
+    Thread sleep (7000)
+    router ! JobNum(3)
+    Thread sleep (800)
+    router ! Job("test.txt", "Jobs/job3/test.txt")
+    router ! Job("test1.txt", "Jobs/job3/test1.txt")
+    router ! Job("test2.txt", "Jobs/job3/test2.txt")
 
     Thread sleep (400)
     router ! Flush
@@ -85,15 +86,10 @@ class MapReduceClient extends Actor {
       if (total >= 3) {
         sendJob()
       }
-//      else {
-//        println("Service Currently Unavailable")
-//      }
+
     case MemberUp(member) if member.hasRole("mapper")=>
       mapTotal += 1
       println("mapper seen ", mapTotal)
-//      if (total >= 9){
-//        sendJob()
-//      }
 
     case UnreachableMember(member) =>
       //println("Member detected as unreachable: {}", member)

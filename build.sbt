@@ -11,5 +11,6 @@ settings (
 //  libraryDependencies += "com.typesafe.akka" %% "akka-remote" % "2.6.14",
   libraryDependencies += "com.typesafe.akka" %% "akka-serialization-jackson" % "2.6.14",
   libraryDependencies +="com.typesafe.akka" %% "akka-cluster" % "2.6.14",
-  libraryDependencies +="com.typesafe.akka" %% "akka-cluster-tools" % "2.6.14"
+  libraryDependencies +="com.typesafe.akka" %% "akka-cluster-tools" % "2.6.14",
+  libraryDependencies += "org.jsoup" % "jsoup" % "1.13.1"
 )
