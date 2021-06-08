@@ -24,6 +24,10 @@ class MapReduceService extends Actor {
     cluster.subscribe(self, initialStateMode = InitialStateAsEvents,
       classOf[MemberEvent], classOf[UnreachableMember])
   }
+  override def postStop() : Unit = {
+    supervisor !
+    cluster.unsubscribe(self)
+  }
   def sendJob(): Unit ={
 
       while (queue.nonEmpty){
@@ -37,9 +41,7 @@ class MapReduceService extends Actor {
   var mapTotal = 0
   def receive = {
     case Job(in_key, in_value) =>
-
       queue.enqueue(Job(in_key, in_value))
-//      println("Received job with ", in_key, in_value, queue.size)
       if (mapTotal >=1){
         sendJob()
       }
@@ -47,7 +49,6 @@ class MapReduceService extends Actor {
       mapRouter ! Broadcast(JobNum(num))
     case MemberUp(member) if member.hasRole("mapper")=>
       mapTotal += 1
-      println("Master sees mapper ", mapTotal)
     case Flush =>
       mapRouter ! Broadcast(Flush)
 

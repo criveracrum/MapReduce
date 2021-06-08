@@ -13,7 +13,9 @@ class ClusterSupervisor extends Actor{
       classOf[MemberEvent], classOf[UnreachableMember])
   }
 
-  override def postStop(): Unit = cluster.unsubscribe(self)
+  override def postStop() : Unit = {
+    cluster.unsubscribe(self)
+  }
 
   override val supervisorStrategy = OneForOneStrategy() {
     case _ => {
@@ -22,30 +24,46 @@ class ClusterSupervisor extends Actor{
     }
   }
   var serviceNode = 0
+  var mapper = 0
+  var reducer = 0
   var serviceAvailable = false
-
 
   def receive: Receive =  {
     case MemberUp(member) if member.hasRole("service") =>
       serviceNode += 1
       serviceAvailable = true
-
       println("Master is online")
 
 
-    case MemberUp(member) =>
-      println("Member is Up: {}", member.address)
+    case MemberUp(member) if member.hasRole("mapper") =>
+      mapper += 1
+      serviceAvailable = true
+      println("Mapper is online")
+    case MemberUp(member) if member.hasRole("reducer") =>
+      reducer += 1
+      serviceAvailable = true
+      println("Reducer is online")
+
 
     case UnreachableMember(member) if member.hasRole("service")=>
       serviceNode -= 1
       serviceAvailable = false
       println("Master is offline. Service is down")
+    case UnreachableMember(member) if member.hasRole("mapper") =>
+      mapper -= 1
+      if (mapper == 0){
+        serviceAvailable = false
+        MapReduceApp.startupWorkers()
+      }
+    case UnreachableMember(member) if member.hasRole("mapper") =>
+      reducer -= 1
+      if (reducer == 0){
+        serviceAvailable = false
+        MapReduceApp.startupWorkers()
+      }
 
-    case UnreachableMember(member) =>
-      println("Member detected as unreachable: {}", member)
-    case MemberRemoved(member, previousStatus) =>
-      println("Member is Removed: {} after {}",
-        member.address, previousStatus)
+    case MemberRemoved(member, previousStatus) if member.hasRole("service")=>
+      MapReduceApp.startupMaster("0")
     case RequestForService() =>
       println("Supervisor got request for Service")
       if (serviceAvailable){

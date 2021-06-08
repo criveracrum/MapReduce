@@ -34,6 +34,8 @@ class MapReduceClient extends Actor {
     name = "workerRouter")
   val supervisor = context.actorSelection("akka://ClusterSystem@127.0.0.1:2552/user/supervisor")
 
+  var serviceAccept = false
+
   override def preStart(): Unit = {
     println("Client Start Path is: " + self.path.toString)
     cluster.subscribe(self, initialStateMode = InitialStateAsEvents,
@@ -42,33 +44,36 @@ class MapReduceClient extends Actor {
 
   def sendJob(): Unit = {
 
-
-    router ! JobNum(1)
-    Thread sleep (800)
-    router ! Job("Title1", "Jobs/job1/Title1.txt")
-    router ! Job("Title2", "Jobs/job1/Title2.txt")
-    router ! Job("Title3", "Jobs/job1/Title3.txt")
-    Thread sleep (400)
-    router ! Flush
-
+    if (serviceAccept) {
+      router ! JobNum(1)
+      Thread sleep (800)
+      router ! Job("Title1", "Jobs/job1/Title1.txt")
+      router ! Job("Title2", "Jobs/job1/Title2.txt")
+      router ! Job("Title3", "Jobs/job1/Title3.txt")
+      Thread sleep (400)
+      router ! Flush
+    }
     Thread sleep (7000)
-    router ! JobNum(2)
-    Thread sleep (800)
-    router ! Job("Bleak House", "Jobs/job2/Bleak House.txt")
-    router ! Job("The Cricket on the Hearth", "Jobs/job2/The Cricket on the Hearth.txt")
-    router ! Job("The Old Curiosity Shop", "Jobs/job2/The Old Curiosity Shop.txt")
-    Thread sleep (400)
-    router ! Flush
-
+    if (serviceAccept) {
+      router ! JobNum(2)
+      Thread sleep (800)
+      router ! Job("Bleak House", "Jobs/job2/Bleak House.txt")
+      router ! Job("The Cricket on the Hearth", "Jobs/job2/The Cricket on the Hearth.txt")
+      router ! Job("The Old Curiosity Shop", "Jobs/job2/The Old Curiosity Shop.txt")
+      Thread sleep (400)
+      router ! Flush
+    }
     Thread sleep (7000)
-    router ! JobNum(3)
-    Thread sleep (800)
-    router ! Job("test.txt", "Jobs/job3/test.txt")
-    router ! Job("test1.txt", "Jobs/job3/test1.txt")
-    router ! Job("test2.txt", "Jobs/job3/test2.txt")
+    if (serviceAccept) {
+      router ! JobNum(3)
+      Thread sleep (800)
+      router ! Job("test.html", "Jobs/job3/test.txt")
+      router ! Job("test1.html", "Jobs/job3/test1.txt")
+      router ! Job("test2.html", "Jobs/job3/test2.txt")
 
-    Thread sleep (400)
-    router ! Flush
+      Thread sleep (400)
+      router ! Flush
+    }
   }
 
   var total = 0
@@ -96,9 +101,11 @@ class MapReduceClient extends Actor {
 //        total, member.address)
     case msg if (msg == "Start") =>
       println(msg)
+      serviceAccept = true
       sendJob()
     case msg if (msg == "Wait") =>
       println(msg)
+      serviceAccept = false
       Thread sleep (800)
       supervisor ! RequestForService
   }

@@ -20,6 +20,7 @@ class MapActor extends Actor {
     println("MapActor Start Path is: " + self.path.toString)
   }
 
+
   var currJob = 1
   def receive = {
     case Job(in_key, in_value) =>

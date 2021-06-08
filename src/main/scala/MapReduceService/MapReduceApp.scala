@@ -9,7 +9,7 @@ object MapReduceApp {
   def main(args: Array[String]): Unit = {
     if (args.isEmpty) {
       startUpServisor()
-      startupMaster()
+      startupMaster("")
       startupWorkers()
       MapReduceClient.main(Array.empty)
     } else {
@@ -17,11 +17,14 @@ object MapReduceApp {
     }
   }
 
-  def startupMaster(): Unit = {
-
+  def startupMaster(arg: String): Unit = {
+    var port: String = "2551"
+    if (arg != "") {
+        port = arg
+    }
     val config = ConfigFactory.parseString(
       s"""
-        akka.remote.artery.canonical.port=2551
+        akka.remote.artery.canonical.port=$port
         """).withFallback(
       ConfigFactory.parseString("akka.cluster.roles = [service]")).
       withFallback(ConfigFactory.load("workers"))

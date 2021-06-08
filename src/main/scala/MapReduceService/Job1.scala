@@ -32,7 +32,6 @@ class MapJob1 extends Mapper[String, String, String, Int]{
     }
     jobs
   }
-
 }
 
 case class ReduceJob1() extends Reducer[String, Int, Int] {
@@ -77,8 +76,6 @@ class MapJob2 extends Mapper[String, String, String, String]{
     jobs
   }
 }
-
-
 
 
 class MapJob3 extends Mapper[String, String, String, String]{
