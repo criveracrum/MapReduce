@@ -32,7 +32,7 @@ class MapReduceClient extends Actor {
 
   val router = context.actorOf(FromConfig.props(Props[MapReduceService]()),
     name = "workerRouter")
-  val supervisor = context.actorSelection("akka://ClusterSystem@127.0.0.1:2552/user/supervisor")
+  var supervisor = context.actorSelection("akka://ClusterSystem@127.0.0.1:2552/user/supervisor")
 
   var serviceAccept = false
 
@@ -40,6 +40,9 @@ class MapReduceClient extends Actor {
     println("Client Start Path is: " + self.path.toString)
     cluster.subscribe(self, initialStateMode = InitialStateAsEvents,
       classOf[MemberEvent], classOf[UnreachableMember])
+  }
+  override def postStop() : Unit = {
+    cluster.unsubscribe(self)
   }
 
   def sendJob(): Unit = {
@@ -50,6 +53,7 @@ class MapReduceClient extends Actor {
       router ! Job("Title1", "Jobs/job1/Title1.txt")
       router ! Job("Title2", "Jobs/job1/Title2.txt")
       router ! Job("Title3", "Jobs/job1/Title3.txt")
+      router ! Job("Title4", "Jobs/job1/Title4.txt")
       Thread sleep (400)
       router ! Flush
     }
@@ -60,6 +64,7 @@ class MapReduceClient extends Actor {
       router ! Job("Bleak House", "Jobs/job2/Bleak House.txt")
       router ! Job("The Cricket on the Hearth", "Jobs/job2/The Cricket on the Hearth.txt")
       router ! Job("The Old Curiosity Shop", "Jobs/job2/The Old Curiosity Shop.txt")
+      router ! Job("Hunted Down", "Jobs/job2/Hunted Down.txt")
       Thread sleep (400)
       router ! Flush
     }
@@ -70,18 +75,22 @@ class MapReduceClient extends Actor {
       router ! Job("test.html", "Jobs/job3/test.txt")
       router ! Job("test1.html", "Jobs/job3/test1.txt")
       router ! Job("test2.html", "Jobs/job3/test2.txt")
+      router ! Job("test4.html", "Jobs/job3/test4.txt")
 
       Thread sleep (400)
       router ! Flush
     }
   }
 
-  var total = 0
-  var mapTotal= 0
+
 
   def receive = {
     case MemberUp(member) if member.hasRole("supervisor") => {
       println("client sees supervisor")
+      /*
+      amends correct path to supervisor
+       */
+      supervisor = context.actorSelection(RootActorPath(member.address) / "user" / "supervisor")
       supervisor ! "Hi"
       supervisor ! RequestForService()
     }
@@ -91,7 +100,7 @@ class MapReduceClient extends Actor {
 //
 //    case MemberUp(member) if member.hasRole("mapper")=>
 //      mapTotal += 1
-//      println("mapper seen ", mapTotal)
+//      //println("mapper seen ", mapTotal)
 //
 //    case UnreachableMember(member) =>
 //      //println("Member detected as unreachable: {}", member)

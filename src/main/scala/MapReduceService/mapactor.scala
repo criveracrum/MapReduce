@@ -1,6 +1,7 @@
 package MapReduceService
 
 import akka.actor.{Actor, ActorRef, Props}
+import akka.cluster.Cluster
 import akka.cluster.ClusterEvent.{InitialStateAsEvents, MemberEvent, UnreachableMember}
 import akka.routing.ConsistentHashingRouter.ConsistentHashableEnvelope
 import akka.routing.{Broadcast, FromConfig}
@@ -19,7 +20,10 @@ class MapActor extends Actor {
   override def preStart(): Unit = {
     println("MapActor Start Path is: " + self.path.toString)
   }
-
+  override def postStop() : Unit = {
+    val cluster = Cluster(context.system)
+    cluster.unsubscribe(self)
+  }
 
   var currJob = 1
   def receive = {
@@ -37,8 +41,7 @@ class MapActor extends Actor {
     case Flush =>
       reduceRouter ! Broadcast(Flush)
 
-    case msg =>
-          println("Misc Message ", msg)
+
 
 
   }

@@ -18,6 +18,9 @@ class ReduceActor extends Actor {
       classOf[MemberEvent], classOf[UnreachableMember])
     println("ReduceActor Start Path is: " + self.path.toString)
   }
+  override def postStop() : Unit = {
+    cluster.unsubscribe(self)
+  }
 
   val job1 = ReduceJob1()
   val job2 = ReduceJob2()
@@ -56,8 +59,7 @@ class ReduceActor extends Actor {
             FlushTotal = 0
         }
       }
-    case msg =>
-      println("Misc Message ", msg)
+
   }
 
   def reduce[C, D](out_key: C, inter_val: D): Unit = {
